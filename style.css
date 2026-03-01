@@ -1,4 +1,7 @@
-/* Remove default browser spacing */
+/* ============================= */
+/* RESET */
+/* ============================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,100 +13,258 @@ body {
     height: 100%;
 }
 
-/* ===== MAIN LAYOUT ===== */
+/* ============================= */
+/* BODY – Apple Romantic Luxury */
+/* ============================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+
+    opacity: 0;
+    transition: opacity 0.8s ease;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 158, 173, 0.75), transparent 40%),
+        radial-gradient(circle at 85% 70%, rgba(144, 255, 218, 0.598), transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.702), transparent 60%),
+        linear-gradient(135deg, #fdfbff, #f3f6f9);
+
+    background-size: 200% 200%;
+    animation: luxuryFloat 25s ease infinite;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+@keyframes luxuryFloat {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Soft cinematic glow */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4), transparent 70%);
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    z-index: 0;
+}
+
+/* ============================= */
+/* MAIN LAYOUT */
+/* ============================= */
 
 .main-layout {
     display: flex;
     height: 100vh;
+    position: relative;
+    z-index: 5;
+    animation: fadeUp 1.2s ease forwards;
+    opacity: 0;
 }
 
-/* Left Side */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================= */
+/* LEFT SIDE */
+/* ============================= */
+
 .left-side {
     width: 40%;
-    background: #f6c1c7;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px;
+    padding: 80px;
     color: #222;
+    position: relative;
+    z-index: 5;
 }
 
 .left-side h1 {
-    font-size: 3.5em;
-    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5em;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    background: linear-gradient(90deg, #111, #444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .left-side h2 {
     font-weight: 300;
-    margin-top: 10px;
+    opacity: 0.6;
+    margin-top: 15px;
 }
 
 .subtitle {
-    margin-top: 20px;
-    font-size: 1.2em;
+    opacity: 0.6;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin-top: 30px;
 }
 
-/* Right Side */
+.letter {
+    margin-top: 30px;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 380px;
+    opacity: 0.8;
+}
+
+/* ============================= */
+/* RIGHT SIDE */
+/* ============================= */
+
 .right-side {
     width: 60%;
-    background: #a8c7c1;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
     padding: 40px;
+    position: relative;
+    z-index: 5;
 }
 
-/* Gift Cards */
+/* ============================= */
+/* GIFT CARDS */
+/* ============================= */
+
 .gift-card {
-    width: 260px;
-    height: 340px;
-    background: #f4efe8;
-    border-radius: 30px;
-    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+    width: 270px;
+    height: 360px;
+    padding: 45px 35px;
+    border-radius: 32px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-    padding: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+    position: relative;
+    z-index: 10;
+
+    opacity: 0;
+    transform: translateY(40px);
+    animation: cardIn 0.8s ease forwards;
+
+    transition: all 0.5s cubic-bezier(.16, 1, .3, 1);
+}
+
+.gift-card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.gift-card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.gift-card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes cardIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .gift-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.18);
+    transform: translateY(-10px) scale(1.04);
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.12),
+        0 0 60px rgba(255, 182, 193, 0.35);
 }
 
 .gift-card .icon {
-    font-size: 70px;
-    margin-bottom: 25px;
+    font-size: 60px;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
 }
 
 .gift-card h3 {
-    font-size: 26px;
-    margin-bottom: 15px;
+    font-size: 28px;
+    margin-bottom: 14px;
     line-height: 1.2;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
 }
 
 .gift-card p {
     font-size: 16px;
-    color: #555;
     line-height: 1.6;
-    max-width: 220px;
+    color: rgba(0, 0, 0, 0.55);
 }
 
+/* ============================= */
+/* FLOATING HEARTS (Behind Cards) */
+/* ============================= */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    /* behind layout (z-index 5 & 10) */
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 18px;
+    color: rgba(255, 120, 150, 0.15);
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+    }
+}
+
+/* ============================= */
 /* SLIDESHOW */
+/* ============================= */
+
 #slideshow {
     position: fixed;
-    width: 100%;
-    height: 100vh;
+    inset: 0;
     background: black;
-    overflow: hidden;
     z-index: 999;
+    overflow: hidden;
 }
 
 .slide {
@@ -111,12 +272,24 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     opacity: 0;
     transition: opacity 2s ease-in-out;
+    animation: zoom 8s ease-in-out forwards;
 }
 
 .slide.active {
     opacity: 1;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
 }
 
 .slideshow-text {
@@ -129,144 +302,9 @@ body {
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
 
-.hidden {
-    display: none;
-}
-
-.slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    /* 👈 add this */
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-}
-
-#slideshow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: black;
-}
-
-.admin-container {
-    text-align: center;
-    margin-top: 100px;
-}
-
-input {
-    padding: 10px;
-    border-radius: 20px;
-    border: none;
-    margin: 10px;
-    width: 200px;
-}
-
-#results {
-    margin-top: 30px;
-    font-size: 18px;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-}
-
-.left-side h1 {
-    font-family: 'Playfair Display', serif;
-}
-
-@media (max-width: 900px) {
-    .main-layout {
-        flex-direction: column;
-    }
-
-    .left-side,
-    .right-side {
-        width: 100%;
-        height: 50vh;
-    }
-
-    .right-side {
-        flex-direction: column;
-    }
-}
-
-/* ===== ADMIN DARK MODE ===== */
-
-body {
-    margin: 0;
-}
-
-.admin-container {
-    min-height: 100vh;
-    background: #121212;
-    color: #f1f1f1;
-    padding: 60px;
-}
-
-#loginBox {
-    text-align: center;
-}
-
-#loginBox input {
-    background: #1e1e1e;
-    color: white;
-    border: 1px solid #333;
-}
-
-#loginBox button {
-    background: #ff4d6d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-#adminPanel h2 {
-    margin-bottom: 20px;
-}
-
-.admin-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-#sortSelect {
-    background: #1e1e1e;
-    color: white;
-    border: 1px solid #333;
-    padding: 5px 10px;
-    border-radius: 10px;
-}
-
-.entry {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.delete-btn {
-    background: #ff4d6d;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-.delete-btn:hover {
-    background: #ff1f4b;
-}
-
+/* ============================= */
 /* SUCCESS SCREEN */
+/* ============================= */
 
 .success-container {
     height: 100vh;
@@ -287,4 +325,271 @@ body {
 .success-container h2 {
     font-size: 2em;
     margin-bottom: 15px;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+
+    .main-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        height: auto;
+        padding: 50px;
+    }
+
+    .right-side {
+        flex-direction: column;
+    }
+
+    .gift-card {
+        width: 90%;
+        max-width: 340px;
+    }
+}
+
+/* ============================= */
+/* CINEMATIC FOCUS MODE */
+/* ============================= */
+
+.focus-overlay {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.2);
+
+    opacity: 0;
+    pointer-events: none;
+    /* 👈 vigtigt */
+    transition: opacity 0.6s ease;
+    z-index: 50;
+}
+
+.focus-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    /* 👈 først når aktiv */
+}
+
+.gift-card.focused {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.15);
+    width: 340px;
+    height: 420px;
+    z-index: 100;
+    box-shadow:
+        0 60px 120px rgba(0, 0, 0, 0.2),
+        0 0 120px rgba(255, 182, 193, 0.4);
+    transition: all 0.8s cubic-bezier(.16, 1, .3, 1);
+}
+
+.main-layout.blurred {
+    filter: blur(10px);
+    transition: filter 0.6s ease;
+}
+
+/* ============================= */
+/* CINEMATIC EXPLOSION MODE */
+/* ============================= */
+
+.gift-card.exploding {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.3);
+    z-index: 200;
+    animation: explodeSequence 1.8s forwards;
+}
+
+@keyframes explodeSequence {
+
+    /* Center + pause */
+    0% {
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    30% {
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    /* Shake */
+    40% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(1deg);
+    }
+
+    45% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(-1deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
+    }
+
+    55% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(-2deg);
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
+    }
+
+    /* Explosion */
+    80% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0.8;
+        filter: blur(8px);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+        filter: blur(20px);
+    }
+}
+
+/* Fade resten ud */
+.main-layout.fade-out {
+    animation: layoutFade 1.8s forwards;
+}
+
+@keyframes layoutFade {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* White flash effect */
+.flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 150;
+    pointer-events: none;
+    animation: flashBang 1.8s forwards;
+}
+
+@keyframes flashBang {
+    0% {
+        opacity: 0;
+    }
+
+    65% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ============================= */
+/* CINEMATIC CARD EXPLOSION */
+/* ============================= */
+
+.gift-card.exploding {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 200;
+    animation: explodeSequence 1.6s forwards ease-in-out;
+}
+
+@keyframes explodeSequence {
+
+    /* Flyt til center */
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    25% {
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+
+    /* Shake */
+    35% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(1deg);
+    }
+
+    40% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(-1deg);
+    }
+
+    45% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(-2deg);
+    }
+
+    55% {
+        transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
+    }
+
+    /* Explosion */
+    80% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(4);
+        opacity: 0;
+    }
+}
+
+/* ============================= */
+/* CENTER + HEART BURST */
+/* ============================= */
+
+.gift-card.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.3);
+    z-index: 200;
+    transition: transform 0.6s cubic-bezier(.16, 1, .3, 1);
+}
+
+.gift-card.final-explode {
+    animation: finalBoom 0.6s forwards ease-out;
+}
+
+@keyframes finalBoom {
+    0% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Hide card text until typing starts */
+
+body.typing-mode .gift-card h3,
+body.typing-mode .gift-card p {
+    visibility: hidden;
 }

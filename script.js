@@ -29,19 +29,67 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
+
 
 window.selectGift = async function (gift) {
+
+    const cards = document.querySelectorAll(".gift-card");
+
     try {
         await addDoc(collection(db, "giftSelections"), {
             selectedGift: gift,
             timestamp: new Date()
         });
 
-        // Save locally
         localStorage.setItem("selectedGift", gift);
 
-        // Redirect
-        window.location.href = "success.html";
+        // Find clicked card
+        let clickedCard = null;
+        cards.forEach(card => {
+            if (card.getAttribute("onclick").includes(gift)) {
+                clickedCard = card;
+            }
+        });
+
+        if (!clickedCard) return;
+
+        // Find center position BEFORE changing to fixed
+        const rect = clickedCard.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Explosion hearts
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement("div");
+            heart.classList.add("explosion-heart");
+            heart.innerText = "❤";
+
+            heart.style.left = centerX + "px";
+            heart.style.top = centerY + "px";
+
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = 150 + Math.random() * 200;
+
+            const x = Math.cos(angle) * distance + "px";
+            const y = Math.sin(angle) * distance + "px";
+
+            heart.style.setProperty("--x", x);
+            heart.style.setProperty("--y", y);
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 1200);
+        }
+
+        // Explode card
+        clickedCard.classList.add("exploding");
+
+        setTimeout(() => {
+            window.location.href = "success.html";
+        }, 1600);
 
     } catch (error) {
         console.error("Error saving gift:", error);
@@ -65,7 +113,7 @@ function showNextSlide() {
 }
 
 // Change image every 3 seconds
-setInterval(showNextSlide, 2000);
+setInterval(showNextSlide, 1500);
 
 // End slideshow and show main content
 function endSlideshow() {
@@ -78,6 +126,11 @@ function endSlideshow() {
     setTimeout(() => {
         slideshow.style.display = "none";
         mainContent.classList.remove("hidden");
+
+        setTimeout(() => {
+            animateCardsText();
+        }, 300);
+
     }, 2000);
 }
 
@@ -141,4 +194,76 @@ async function loadSelections() {
 
         resultsDiv.appendChild(entry);
     });
+}
+
+/* ===== GENERATE FLOATING HEARTS ===== */
+
+const heartsContainer = document.querySelector(".hearts");
+
+if (heartsContainer) {
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerText = "❤";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = 15 + Math.random() * 20 + "px";
+        heart.style.animationDuration = 8 + Math.random() * 8 + "s";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+
+        heartsContainer.appendChild(heart);
+    }
+}
+
+/* ============================= */
+/* CLEAN TYPEWRITER SYSTEM */
+/* ============================= */
+
+function typeWriter(element, text, speed = 30) {
+    return new Promise(resolve => {
+
+        element.style.visibility = "visible";
+        element.innerHTML = "";
+
+        let i = 0;
+
+        function typing() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            } else {
+                resolve();
+            }
+        }
+
+        typing();
+    });
+}
+
+async function animateCardsText() {
+
+    const cards = document.querySelectorAll(".gift-card");
+
+    for (const card of cards) {
+
+        const titleEl = card.querySelector("h3");
+        const descEl = card.querySelector("p");
+
+        const titleText = titleEl.textContent;
+        const descText = descEl.textContent;
+
+        // CLEAR BEFORE ANYTHING BECOMES VISIBLE
+        titleEl.textContent = "";
+        descEl.textContent = "";
+
+        await typeWriter(titleEl, titleText, 100);
+        await new Promise(r => setTimeout(r, 200));
+        await typeWriter(descEl, descText, 70);
+
+        await new Promise(r => setTimeout(r, 300));
+    }
+
+    // When all done, remove typing-mode completely
+    document.body.classList.remove("typing-mode");
 }

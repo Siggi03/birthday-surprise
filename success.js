@@ -2,6 +2,9 @@ const gift = localStorage.getItem("selectedGift");
 
 document.getElementById("chosenGift").innerText = gift;
 
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});
 // Confetti explosion
 confetti({
     particleCount: 200,
