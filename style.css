@@ -1,0 +1,290 @@
+/* Remove default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.main-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Side */
+.left-side {
+    width: 40%;
+    background: #f6c1c7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    color: #222;
+}
+
+.left-side h1 {
+    font-size: 3.5em;
+    margin: 0;
+}
+
+.left-side h2 {
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+.subtitle {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+/* Right Side */
+.right-side {
+    width: 60%;
+    background: #a8c7c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* Gift Cards */
+.gift-card {
+    width: 260px;
+    height: 340px;
+    background: #f4efe8;
+    border-radius: 30px;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gift-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.18);
+}
+
+.gift-card .icon {
+    font-size: 70px;
+    margin-bottom: 25px;
+}
+
+.gift-card h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.gift-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 220px;
+}
+
+/* SLIDESHOW */
+#slideshow {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slideshow-text {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.hidden {
+    display: none;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* 👈 add this */
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+#slideshow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+}
+
+.admin-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    margin: 10px;
+    width: 200px;
+}
+
+#results {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.left-side h1 {
+    font-family: 'Playfair Display', serif;
+}
+
+@media (max-width: 900px) {
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .left-side,
+    .right-side {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .right-side {
+        flex-direction: column;
+    }
+}
+
+/* ===== ADMIN DARK MODE ===== */
+
+body {
+    margin: 0;
+}
+
+.admin-container {
+    min-height: 100vh;
+    background: #121212;
+    color: #f1f1f1;
+    padding: 60px;
+}
+
+#loginBox {
+    text-align: center;
+}
+
+#loginBox input {
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid #333;
+}
+
+#loginBox button {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#adminPanel h2 {
+    margin-bottom: 20px;
+}
+
+.admin-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+#sortSelect {
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.entry {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #ff1f4b;
+}
+
+/* SUCCESS SCREEN */
+
+.success-container {
+    height: 100vh;
+    background: linear-gradient(135deg, #f6c1c7, #a8c7c1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #222;
+    text-align: center;
+}
+
+.success-container h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.success-container h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+}

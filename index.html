@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tillykke skat ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- SLIDESHOW OVERLAY -->
+    <div id="slideshow">
+        <img class="slide active" src="images/IMG_0094.jpg">
+        <img class="slide" src="images/IMG_1735.JPG">
+        <img class="slide" src="images/IMG_3658.jpg">
+        <img class="slide" src="images/IMG_3772.jpg">
+
+        <div class="slideshow-text">
+            Du er og vil altid være min favorit ❤️
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-layout hidden" id="mainContent">
+
+        <div class="left-side">
+            <h1>Tillykke med fødselsdagen 💖</h1>
+            <h2>Min elskede</h2>
+            <p class="subtitle">Vælg din egen fødselsdag ✨</p>
+        </div>
+
+        <div class="right-side">
+
+            <div class="gift-card" onclick="selectGift('Sommerhusophold + Dragsholm Gourmet')">
+                <div class="icon">🏡✨</div>
+                <h3>Romantisk Sommerhus</h3>
+                <p>Ophold i sommerhus med middag på Dragsholm Gourmet</p>
+            </div>
+
+            <div class="gift-card" onclick="selectGift('Sommerhus + Dragsholm Bistro + Løbesko')">
+                <div class="icon">🏡🥂</div>
+                <h3>Sommerhus & Bistro</h3>
+                <p>Sommerhus med middag på Dragsholm Bistro + løbesko</p>
+            </div>
+
+            <div class="gift-card" onclick="selectGift('Løbesko + Løbeur')">
+                <div class="icon">👟⌚</div>
+                <h3>Run Upgrade</h3>
+                <p>Nye løbesko og løbeur</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <p id="message"></p>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+
+</html>
