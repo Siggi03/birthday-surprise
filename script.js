@@ -134,23 +134,6 @@ function endSlideshow() {
     }, 2000);
 }
 
-// ===== ADMIN LOGIN =====
-
-const ADMIN_PASSWORD = "123"; // 👈 change this
-
-window.checkPassword = async function () {
-    const input = document.getElementById("adminPassword").value;
-    const message = document.getElementById("loginMessage");
-
-    if (input === ADMIN_PASSWORD) {
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("adminPanel").classList.remove("hidden");
-        loadSelections();
-    } else {
-        message.innerText = "Wrong password 😅";
-    }
-};
-
 // ===== LOAD DATA =====
 
 async function loadSelections() {
@@ -266,4 +249,9 @@ async function animateCardsText() {
 
     // When all done, remove typing-mode completely
     document.body.classList.remove("typing-mode");
+}
+
+// Auto-load if on admin page
+if (document.getElementById("adminPanel")) {
+    loadSelections();
 }
