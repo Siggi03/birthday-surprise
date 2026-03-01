@@ -1,3 +1,6 @@
+// Mark that user came from success page
+sessionStorage.setItem("skipSlideshow", "true");
+
 const gift = localStorage.getItem("selectedGift");
 
 document.getElementById("chosenGift").innerText = gift;

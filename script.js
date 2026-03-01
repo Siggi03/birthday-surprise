@@ -33,6 +33,7 @@ window.addEventListener("load", () => {
     document.body.classList.add("loaded");
 });
 
+const shouldSkip = sessionStorage.getItem("skipSlideshow");
 
 window.selectGift = async function (gift) {
 
@@ -96,9 +97,16 @@ window.selectGift = async function (gift) {
     }
 };
 
-// SLIDESHOW LOGIC
+/* ============================= */
+/* SMART SLIDESHOW SYSTEM */
+/* ============================= */
+
+// Check if we should skip slideshow (coming back from success page)
+const shouldSkipSlideshow = sessionStorage.getItem("skipSlideshow");
+
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
+let slideshowInterval = null;
 
 function showNextSlide() {
     slides[currentSlide].classList.remove("active");
@@ -112,13 +120,17 @@ function showNextSlide() {
     slides[currentSlide].classList.add("active");
 }
 
-// Change image every 3 seconds
-setInterval(showNextSlide, 1500);
+function startSlideshow() {
+    slideshowInterval = setInterval(showNextSlide, 2000);
+}
 
-// End slideshow and show main content
 function endSlideshow() {
     const slideshow = document.getElementById("slideshow");
     const mainContent = document.getElementById("mainContent");
+
+    if (slideshowInterval) {
+        clearInterval(slideshowInterval);
+    }
 
     slideshow.style.opacity = "0";
     slideshow.style.transition = "opacity 2s ease";
@@ -127,13 +139,42 @@ function endSlideshow() {
         slideshow.style.display = "none";
         mainContent.classList.remove("hidden");
 
+        // 🔥 START TYPEWRITER
         setTimeout(() => {
-            animateCardsText();
+            if (typeof animateCardsText === "function") {
+                animateCardsText();
+            }
         }, 300);
 
     }, 2000);
 }
 
+// Decide whether to play or skip slideshow
+window.addEventListener("DOMContentLoaded", () => {
+
+    const slideshow = document.getElementById("slideshow");
+    const mainContent = document.getElementById("mainContent");
+
+    if (shouldSkipSlideshow) {
+
+        if (slideshow && mainContent) {
+            slideshow.style.display = "none";
+            mainContent.classList.remove("hidden");
+        }
+
+        sessionStorage.removeItem("skipSlideshow");
+
+        // 🔥 START TYPEWRITER
+        setTimeout(() => {
+            if (typeof animateCardsText === "function") {
+                animateCardsText();
+            }
+        }, 300);
+
+    } else {
+        startSlideshow();
+    }
+});
 // ===== LOAD DATA =====
 
 async function loadSelections() {
@@ -255,3 +296,16 @@ async function animateCardsText() {
 if (document.getElementById("adminPanel")) {
     loadSelections();
 }
+
+/* ============================= */
+/* HANDLE BACK BUTTON (bfcache) */
+/* ============================= */
+
+window.addEventListener("pageshow", function (event) {
+
+    // If page was loaded from cache
+    if (event.persisted) {
+        location.reload();
+    }
+
+});
