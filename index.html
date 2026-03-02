@@ -1,47 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tillykke skat</title>
     <link rel="stylesheet" href="style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 </head>
 
 <body class="typing-mode">
 
-    <!-- SLIDESHOW OVERLAY -->
-    <div id="slideshow">
-        <img class="slide active" src="images/IMG_0094.jpg">
-        <img class="slide" src="images/IMG_1735.JPG">
-        <img class="slide" src="images/IMG_3658.jpg">
-
-        <div class="slideshow-text">
-            Du er og vil altid være min favorit ❤️
-        </div>
-    </div>
-
-    <div class="light-orb"></div>
-    <div class="light-orb"></div>
-
     <!-- MAIN CONTENT -->
-    <div class="main-layout hidden" id="mainContent">
+    <div class="main-layout" id="mainContent">
 
-        <div class="left-side">
-            <h1>Tillykke med fødselsdagen</h1>
-            <h2>Min elskede</h2>
-            <p class="subtitle">Vælg din egen fødselsdag ✨</p>
-            <p class="letter">
-                Inden du vælger en gavegave🎁 <br>
-                Hiphip hurraaaaaaaaaaaaaaaa, tillykke med fødselsdagen🎉🎊 <br>
-                PS. Det sidste valg den 3/3/2026 er din gave, så bare vælg så mange gange du vil❤️
-            </p>
+        <div class="page-intro">
+            <div class="date-badge">♡ &nbsp;3. marts 2026</div>
         </div>
 
-        <div class="right-side">
+        <div class="hero-section">
+            <h1>Tillykke med<br>fødselsdagen</h1>
+            <h2>Min elskede</h2>
+            <p class="letter">
+                Inden du vælger en gave 🎁<br>
+                Hiphip hurraaaaaaaaaaaaaaaa, tillykke med fødselsdagen 🎉🎊<br>
+                PS. Det sidste valg den 3/3/2026 er din gave, så bare vælg så mange gange du vil ❤️
+            </p>
+            <p class="subtitle">Vælg din gave ✨</p>
+        </div>
+
+        <div class="cards-section">
 
             <div class="gift-card" onclick="selectGift('Sommerhusophold + Dragsholm Gourmet')">
                 <div class="icon">🏡✨</div>
@@ -66,11 +57,9 @@
     </div>
 
     <p id="message"></p>
-    </div>
     <div class="hearts"></div>
     <div class="focus-overlay" id="focusOverlay"></div>
     <script type="module" src="script.js"></script>
 </body>
-
 
 </html>

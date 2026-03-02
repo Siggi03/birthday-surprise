@@ -95,86 +95,7 @@ window.selectGift = async function (gift) {
     } catch (error) {
         console.error("Error saving gift:", error);
     }
-};
-
-/* ============================= */
-/* SMART SLIDESHOW SYSTEM */
-/* ============================= */
-
-// Check if we should skip slideshow (coming back from success page)
-const shouldSkipSlideshow = sessionStorage.getItem("skipSlideshow");
-
-const slides = document.querySelectorAll(".slide");
-let currentSlide = 0;
-let slideshowInterval = null;
-
-function showNextSlide() {
-    slides[currentSlide].classList.remove("active");
-    currentSlide++;
-
-    if (currentSlide >= slides.length) {
-        endSlideshow();
-        return;
-    }
-
-    slides[currentSlide].classList.add("active");
 }
-
-function startSlideshow() {
-    slideshowInterval = setInterval(showNextSlide, 2000);
-}
-
-function endSlideshow() {
-    const slideshow = document.getElementById("slideshow");
-    const mainContent = document.getElementById("mainContent");
-
-    if (slideshowInterval) {
-        clearInterval(slideshowInterval);
-    }
-
-    slideshow.style.opacity = "0";
-    slideshow.style.transition = "opacity 2s ease";
-
-    setTimeout(() => {
-        slideshow.style.display = "none";
-        mainContent.classList.remove("hidden");
-
-        // 🔥 START TYPEWRITER
-        setTimeout(() => {
-            if (typeof animateCardsText === "function") {
-                animateCardsText();
-            }
-        }, 300);
-
-    }, 2000);
-}
-
-// Decide whether to play or skip slideshow
-window.addEventListener("DOMContentLoaded", () => {
-
-    const slideshow = document.getElementById("slideshow");
-    const mainContent = document.getElementById("mainContent");
-
-    if (shouldSkipSlideshow) {
-
-        if (slideshow && mainContent) {
-            slideshow.style.display = "none";
-            mainContent.classList.remove("hidden");
-        }
-
-        sessionStorage.removeItem("skipSlideshow");
-
-        // 🔥 START TYPEWRITER
-        setTimeout(() => {
-            if (typeof animateCardsText === "function") {
-                animateCardsText();
-            }
-        }, 300);
-
-    } else {
-        startSlideshow();
-    }
-});
 // ===== LOAD DATA =====
 
 async function loadSelections() {
@@ -291,6 +212,15 @@ async function animateCardsText() {
     // When all done, remove typing-mode completely
     document.body.classList.remove("typing-mode");
 }
+
+// Start typewriter automatically when page loads
+window.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        if (typeof animateCardsText === "function") {
+            animateCardsText();
+        }
+    }, 300);
+});
 
 // Auto-load if on admin page
 if (document.getElementById("adminPanel")) {

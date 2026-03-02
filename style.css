@@ -1,4 +1,20 @@
 /* ============================= */
+/* VARIABLES */
+/* ============================= */
+
+:root {
+    --rose:          #C4728A;
+    --rose-light:    #F0C4CF;
+    --rose-glow:     rgba(196, 114, 138, 0.14);
+    --blush:         #FDE8EE;
+    --text:          #1D1D1F;
+    --text-secondary: #6E6E73;
+    --text-muted:    #AEAEB2;
+    --card-bg:       rgba(255, 255, 255, 0.76);
+    --card-border:   rgba(220, 170, 185, 0.38);
+}
+
+/* ============================= */
 /* RESET */
 /* ============================= */
 
@@ -8,59 +24,30 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     height: 100%;
 }
 
 /* ============================= */
-/* BODY – Apple Romantic Luxury */
+/* BODY */
 /* ============================= */
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow-x: hidden;
-
     opacity: 0;
-    transition: opacity 0.8s ease;
+    transition: opacity 0.9s ease;
 
     background:
-        radial-gradient(circle at 15% 20%, rgba(255, 158, 173, 0.75), transparent 40%),
-        radial-gradient(circle at 85% 70%, rgba(144, 255, 218, 0.598), transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.702), transparent 60%),
-        linear-gradient(135deg, #fdfbff, #f3f6f9);
-
-    background-size: 200% 200%;
-    animation: luxuryFloat 25s ease infinite;
+        radial-gradient(ellipse at 18% 12%, rgba(249, 218, 228, 0.65) 0%, transparent 42%),
+        radial-gradient(ellipse at 82% 80%, rgba(255, 218, 208, 0.55) 0%, transparent 42%),
+        radial-gradient(ellipse at 52% 48%, rgba(253, 232, 240, 0.4) 0%, transparent 60%),
+        #FDFAF8;
+    background-attachment: fixed;
 }
 
 body.loaded {
     opacity: 1;
-}
-
-@keyframes luxuryFloat {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* Soft cinematic glow */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4), transparent 70%);
-    pointer-events: none;
-    mix-blend-mode: soft-light;
-    z-index: 0;
 }
 
 /* ============================= */
@@ -68,15 +55,23 @@ body::after {
 /* ============================= */
 
 .main-layout {
+    min-height: 100vh;
     display: flex;
-    height: 100vh;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     z-index: 5;
-    animation: fadeUp 1.2s ease forwards;
+    padding: 52px 24px 68px;
     opacity: 0;
+    animation: fadeUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.1s;
 }
 
 @keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);
@@ -84,63 +79,87 @@ body::after {
 }
 
 /* ============================= */
-/* LEFT SIDE */
+/* DATE BADGE */
 /* ============================= */
 
-.left-side {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px;
-    color: #222;
-    position: relative;
-    z-index: 5;
+.page-intro {
+    margin-bottom: 44px;
 }
 
-.left-side h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 4.5em;
-    letter-spacing: -2px;
-    line-height: 1.05;
-    background: linear-gradient(90deg, #111, #444);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.date-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--rose-light);
+    border-radius: 999px;
+    padding: 9px 22px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--rose);
+    letter-spacing: 0.4px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+        0 4px 20px rgba(196, 114, 138, 0.1),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
 }
 
-.left-side h2 {
-    font-weight: 300;
-    opacity: 0.6;
-    margin-top: 15px;
+/* ============================= */
+/* HERO SECTION */
+/* ============================= */
+
+.hero-section {
+    text-align: center;
+    max-width: 640px;
+    margin-bottom: 56px;
 }
 
-.subtitle {
-    opacity: 0.6;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 0.85em;
-    margin-top: 30px;
+.hero-section h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.07;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+.hero-section h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 32px;
+    opacity: 0.9;
 }
 
 .letter {
-    margin-top: 30px;
     font-size: 15px;
-    line-height: 1.8;
-    max-width: 380px;
-    opacity: 0.8;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 22px;
+}
+
+.subtitle {
+    font-size: 11.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3.5px;
+    color: var(--text-muted);
 }
 
 /* ============================= */
-/* RIGHT SIDE */
+/* CARDS SECTION */
 /* ============================= */
 
-.right-side {
-    width: 60%;
+.cards-section {
     display: flex;
+    gap: 22px;
     justify-content: center;
-    align-items: center;
-    gap: 50px;
-    padding: 40px;
+    align-items: stretch;
+    flex-wrap: wrap;
     position: relative;
     z-index: 5;
 }
@@ -150,10 +169,11 @@ body::after {
 /* ============================= */
 
 .gift-card {
-    width: 270px;
-    height: 360px;
-    padding: 45px 35px;
-    border-radius: 32px;
+    width: 258px;
+    min-height: 340px;
+    padding: 40px 30px;
+    border-radius: 28px;
+    cursor: pointer;
 
     display: flex;
     flex-direction: column;
@@ -161,37 +181,33 @@ body::after {
     align-items: center;
     text-align: center;
 
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: var(--card-bg);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--card-border);
 
     box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        0 1px 0 rgba(255, 255, 255, 0.85) inset,
+        0 20px 60px var(--rose-glow),
+        0 4px 16px rgba(0, 0, 0, 0.04);
 
     position: relative;
     z-index: 10;
 
     opacity: 0;
-    transform: translateY(40px);
-    animation: cardIn 0.8s ease forwards;
+    transform: translateY(28px);
+    animation: cardIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 
-    transition: all 0.5s cubic-bezier(.16, 1, .3, 1);
+    transition:
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.45s ease,
+        border-color 0.3s ease;
 }
 
-.gift-card:nth-child(1) {
-    animation-delay: 0.2s;
-}
-
-.gift-card:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.gift-card:nth-child(3) {
-    animation-delay: 0.6s;
-}
+.gift-card:nth-child(1) { animation-delay: 0.15s; }
+.gift-card:nth-child(2) { animation-delay: 0.3s; }
+.gift-card:nth-child(3) { animation-delay: 0.45s; }
 
 @keyframes cardIn {
     to {
@@ -201,35 +217,39 @@ body::after {
 }
 
 .gift-card:hover {
-    transform: translateY(-10px) scale(1.04);
+    transform: translateY(-10px) scale(1.025);
+    border-color: rgba(196, 114, 138, 0.5);
     box-shadow:
-        0 40px 80px rgba(0, 0, 0, 0.12),
-        0 0 60px rgba(255, 182, 193, 0.35);
+        0 1px 0 rgba(255, 255, 255, 0.9) inset,
+        0 32px 80px rgba(196, 114, 138, 0.2),
+        0 8px 24px rgba(196, 114, 138, 0.1);
 }
 
 .gift-card .icon {
-    font-size: 60px;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    font-size: 50px;
+    margin-bottom: 22px;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.07));
+    line-height: 1;
 }
 
 .gift-card h3 {
-    font-size: 28px;
-    margin-bottom: 14px;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 21px;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 11px;
+    line-height: 1.25;
+    color: var(--text);
+    letter-spacing: -0.2px;
 }
 
 .gift-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: rgba(0, 0, 0, 0.55);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-secondary);
 }
 
 /* ============================= */
-/* FLOATING HEARTS (Behind Cards) */
+/* FLOATING HEARTS */
 /* ============================= */
 
 .hearts {
@@ -237,22 +257,150 @@ body::after {
     inset: 0;
     pointer-events: none;
     z-index: 1;
-    /* behind layout (z-index 5 & 10) */
     overflow: hidden;
 }
 
 .heart {
     position: absolute;
     bottom: -50px;
-    font-size: 18px;
-    color: rgba(255, 120, 150, 0.15);
+    color: rgba(196, 114, 138, 0.11);
     animation: floatUp linear infinite;
 }
 
 @keyframes floatUp {
     to {
-        transform: translateY(-110vh);
+        transform: translateY(-110vh) rotate(8deg);
     }
+}
+
+/* ============================= */
+/* EXPLOSION HEARTS */
+/* ============================= */
+
+.explosion-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 300;
+    font-size: 22px;
+    color: var(--rose);
+    transform: translate(-50%, -50%);
+    animation: heartExplode 1.2s ease-out forwards;
+}
+
+@keyframes heartExplode {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            ) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* ============================= */
+/* CINEMATIC EXPLOSION */
+/* ============================= */
+
+.gift-card.exploding {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 200;
+    animation: explodeSequence 1.6s forwards ease-in-out;
+}
+
+@keyframes explodeSequence {
+    0%  { transform: translate(-50%, -50%) scale(1);    opacity: 1; }
+    25% { transform: translate(-50%, -50%) scale(1.3); }
+    35% { transform: translate(-50%, -50%) scale(1.3) rotate(1deg); }
+    40% { transform: translate(-50%, -50%) scale(1.3) rotate(-1deg); }
+    45% { transform: translate(-50%, -50%) scale(1.3) rotate(2deg); }
+    50% { transform: translate(-50%, -50%) scale(1.3) rotate(-2deg); }
+    55% { transform: translate(-50%, -50%) scale(1.3) rotate(0deg); }
+    80% { transform: translate(-50%, -50%) scale(2.5); opacity: 0.9; }
+    100%{ transform: translate(-50%, -50%) scale(4);   opacity: 0; }
+}
+
+.main-layout.fade-out {
+    animation: layoutFade 1.8s forwards;
+}
+
+@keyframes layoutFade {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 150;
+    pointer-events: none;
+    animation: flashBang 1.8s forwards;
+}
+
+@keyframes flashBang {
+    0%   { opacity: 0; }
+    65%  { opacity: 0; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ============================= */
+/* FOCUS OVERLAY */
+/* ============================= */
+
+.focus-overlay {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(253, 240, 244, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 50;
+}
+
+.focus-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.gift-card.focused {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.15);
+    width: 310px;
+    z-index: 100;
+    box-shadow:
+        0 60px 120px rgba(196, 114, 138, 0.25),
+        0 0 0 1px rgba(220, 160, 180, 0.4);
+    transition: all 0.8s cubic-bezier(.16, 1, .3, 1);
+}
+
+.main-layout.blurred {
+    filter: blur(10px);
+    transition: filter 0.6s ease;
+}
+
+/* ============================= */
+/* TYPING MODE */
+/* ============================= */
+
+body.typing-mode .gift-card h3,
+body.typing-mode .gift-card p {
+    visibility: hidden;
 }
 
 /* ============================= */
@@ -278,18 +426,11 @@ body::after {
     animation: zoom 8s ease-in-out forwards;
 }
 
-.slide.active {
-    opacity: 1;
-}
+.slide.active { opacity: 1; }
 
 @keyframes zoom {
-    from {
-        transform: scale(1);
-    }
-
-    to {
-        transform: scale(1.1);
-    }
+    from { transform: scale(1); }
+    to   { transform: scale(1.1); }
 }
 
 .slideshow-text {
@@ -303,293 +444,137 @@ body::after {
 }
 
 /* ============================= */
-/* SUCCESS SCREEN */
+/* SUCCESS PAGE */
 /* ============================= */
 
 .success-container {
-    height: 100vh;
-    background: linear-gradient(135deg, #f6c1c7, #a8c7c1);
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 25% 20%, rgba(249, 218, 228, 0.7) 0%, transparent 50%),
+        radial-gradient(ellipse at 78% 80%, rgba(255, 218, 208, 0.6) 0%, transparent 50%),
+        #FDFAF8;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #222;
     text-align: center;
+    padding: 40px 24px;
 }
 
 .success-container h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 18px;
+    letter-spacing: -1px;
 }
 
 .success-container h2 {
-    font-size: 2em;
-    margin-bottom: 15px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--rose);
+    margin-bottom: 18px;
+}
+
+.success-container p {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+/* ============================= */
+/* ADMIN PAGE */
+/* ============================= */
+
+.admin-container {
+    min-height: 100vh;
+    background: #FDFAF8;
+    padding: 48px 40px;
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+#adminPanel h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+}
+
+.admin-controls {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+#sortSelect {
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    background: white;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    outline: none;
+    cursor: pointer;
+}
+
+.entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: var(--card-bg);
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.entry small {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.delete-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--rose-light);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--rose);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: var(--blush);
 }
 
 /* ============================= */
 /* RESPONSIVE */
 /* ============================= */
 
-@media (max-width: 900px) {
-
+@media (max-width: 860px) {
     .main-layout {
-        flex-direction: column;
-        height: auto;
+        padding: 40px 20px 56px;
     }
 
-    .left-side,
-    .right-side {
-        width: 100%;
-        height: auto;
-        padding: 50px;
-    }
-
-    .right-side {
+    .cards-section {
         flex-direction: column;
+        align-items: center;
     }
 
     .gift-card {
         width: 90%;
         max-width: 340px;
     }
-}
-
-/* ============================= */
-/* CINEMATIC FOCUS MODE */
-/* ============================= */
-
-.focus-overlay {
-    position: fixed;
-    inset: 0;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.2);
-
-    opacity: 0;
-    pointer-events: none;
-    /* 👈 vigtigt */
-    transition: opacity 0.6s ease;
-    z-index: 50;
-}
-
-.focus-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-    /* 👈 først når aktiv */
-}
-
-.gift-card.focused {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.15);
-    width: 340px;
-    height: 420px;
-    z-index: 100;
-    box-shadow:
-        0 60px 120px rgba(0, 0, 0, 0.2),
-        0 0 120px rgba(255, 182, 193, 0.4);
-    transition: all 0.8s cubic-bezier(.16, 1, .3, 1);
-}
-
-.main-layout.blurred {
-    filter: blur(10px);
-    transition: filter 0.6s ease;
-}
-
-/* ============================= */
-/* CINEMATIC EXPLOSION MODE */
-/* ============================= */
-
-.gift-card.exploding {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.3);
-    z-index: 200;
-    animation: explodeSequence 1.8s forwards;
-}
-
-@keyframes explodeSequence {
-
-    /* Center + pause */
-    0% {
-        transform: translate(-50%, -50%) scale(1.2);
-    }
-
-    30% {
-        transform: translate(-50%, -50%) scale(1.3);
-    }
-
-    /* Shake */
-    40% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(1deg);
-    }
-
-    45% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(-1deg);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
-    }
-
-    55% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(-2deg);
-    }
-
-    60% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
-    }
-
-    /* Explosion */
-    80% {
-        transform: translate(-50%, -50%) scale(2.5);
-        opacity: 0.8;
-        filter: blur(8px);
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(4);
-        opacity: 0;
-        filter: blur(20px);
-    }
-}
-
-/* Fade resten ud */
-.main-layout.fade-out {
-    animation: layoutFade 1.8s forwards;
-}
-
-@keyframes layoutFade {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-/* White flash effect */
-.flash {
-    position: fixed;
-    inset: 0;
-    background: white;
-    opacity: 0;
-    z-index: 150;
-    pointer-events: none;
-    animation: flashBang 1.8s forwards;
-}
-
-@keyframes flashBang {
-    0% {
-        opacity: 0;
-    }
-
-    65% {
-        opacity: 0;
-    }
-
-    75% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-/* ============================= */
-/* CINEMATIC CARD EXPLOSION */
-/* ============================= */
-
-.gift-card.exploding {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 200;
-    animation: explodeSequence 1.6s forwards ease-in-out;
-}
-
-@keyframes explodeSequence {
-
-    /* Flyt til center */
-    0% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-
-    25% {
-        transform: translate(-50%, -50%) scale(1.3);
-    }
-
-    /* Shake */
-    35% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(1deg);
-    }
-
-    40% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(-1deg);
-    }
-
-    45% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(2deg);
-    }
-
-    50% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(-2deg);
-    }
-
-    55% {
-        transform: translate(-50%, -50%) scale(1.3) rotate(0deg);
-    }
-
-    /* Explosion */
-    80% {
-        transform: translate(-50%, -50%) scale(2.5);
-        opacity: 0.9;
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(4);
-        opacity: 0;
-    }
-}
-
-/* ============================= */
-/* CENTER + HEART BURST */
-/* ============================= */
-
-.gift-card.centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.3);
-    z-index: 200;
-    transition: transform 0.6s cubic-bezier(.16, 1, .3, 1);
-}
-
-.gift-card.final-explode {
-    animation: finalBoom 0.6s forwards ease-out;
-}
-
-@keyframes finalBoom {
-    0% {
-        transform: translate(-50%, -50%) scale(1.3);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translate(-50%, -50%) scale(3);
-        opacity: 0;
-    }
-}
-
-/* Hide card text until typing starts */
-
-body.typing-mode .gift-card h3,
-body.typing-mode .gift-card p {
-    visibility: hidden;
 }
